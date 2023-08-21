@@ -1,11 +1,14 @@
 package com.anwar.bookapp.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +23,7 @@ import com.anwar.bookapp.service.BookServices;
 
 
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/books")
 public class BookController {
@@ -58,12 +61,12 @@ public class BookController {
 	// build delete book REST API
 	// http://localhost:8080/api/books/1
 	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteBook(@PathVariable("id") long id){
-		
+	public ResponseEntity<Object> deleteBook(@PathVariable("id") long id){
 		// delete book from DB
 		bookServices.deleteBook(id);
-		
-		return new ResponseEntity<String>("Book deleted successfully!.", HttpStatus.OK);
+		Map<String, Object> object = new HashMap<>();
+		object.put("msg", "Data has been deleted succesfully!");
+		return new ResponseEntity<Object>(object, HttpStatus.OK);
 	}
 	
 }

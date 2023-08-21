@@ -13,8 +13,8 @@ import com.anwar.bookapp.model.Department;
 import com.anwar.bookapp.service.DepartmentService;
 
 // Annotation
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-
 @RequestMapping(path="/api/v1")
 public class DepartmentController {
 
